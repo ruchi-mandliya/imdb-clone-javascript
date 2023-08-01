@@ -32,12 +32,12 @@ body {
   font-weight: bold;
   margin-left: 25px;
 }
-.logo2 {
+.coll {
   color: rgb(237, 225, 6);
   /* background-color: dimgray; */
   margin: 0;
 }
-.logo1 {
+.album {
   /* background-color: rgb(2, 88, 91); */
   color: goldenrod;
   margin: 0;
@@ -74,6 +74,7 @@ body {
   border: #f44336;
   margin-right: 15px;
 }
+
 #content {
   display: flex;
   flex-wrap: wrap;
@@ -107,6 +108,8 @@ body {
   text-align: center;
   color: aliceblue;
 }
+
+/* CSS for the favorite and remove buttons */
 button {
   padding: 8px 12px;
   margin: 3px;
