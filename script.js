@@ -127,4 +127,28 @@ function createFavoriteButton(imdbID) {
   });
   return btn;
 }
+
+function showFavorites() {
+  const contentDiv = document.getElementById("content");
+  contentDiv.innerHTML = "";
+
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if (favorites.length > 0) {
+    result.innerHTML = "<h2>My favorite Movies</h2>";
+
+    favorites.forEach((movie) => {
+      const div = document.createElement("div");
+      div.className = "movie";
+      div.innerHTML = `
+      <img src="${movie.Poster}">
+      <p>${movie.Title}</p>
+      
+    `;
+      contentDiv.appendChild(div);
+    });
+  } else {
+    contentDiv.innerHTML = "<h2>No favorite movies found.</h2>";
+  }
+}
 showHomePage();
