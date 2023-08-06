@@ -146,9 +146,35 @@ function showFavorites() {
       
     `;
       contentDiv.appendChild(div);
+
+      const removeBtn = createRemoveButton(movie.imdbID);
+      div.appendChild(removeBtn);
+      contentDiv.appendChild(div);
     });
   } else {
     contentDiv.innerHTML = "<h2>No favorite movies found.</h2>";
   }
 }
+function createRemoveButton(imdbID) {
+  const button = document.createElement("button");
+  button.innerText = "Remove from Favorites";
+
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    // Retrieve favorite movies from local storage
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Remove the movie from the list of favorite movies
+    favorites = favorites.filter((movie) => movie.imdbID !== imdbID);
+
+    // Update the list of favorite movies in local storage
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    // Display the updated list of favorite movies
+    showFavorites();
+  });
+
+  return button;
+}
+
 showHomePage();
