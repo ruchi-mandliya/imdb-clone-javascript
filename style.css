@@ -6,14 +6,14 @@ body {
   background-repeat: repeat;
 
   /* background: linear-gradient(
-      to left bottom,
-      hsla(164, 61%, 63%, 0.401),
-      rgba(0, 0, 0, 0.332),
-      rgba(255, 0, 0, 0.302),
-      hsla(164, 61%, 63%, 0.401),
-      lightblue,
-      rgba(255, 0, 0, 0.356)
-    ); */
+    to left bottom,
+    hsla(164, 61%, 63%, 0.401),
+    rgba(0, 0, 0, 0.332),
+    rgba(255, 0, 0, 0.302),
+    hsla(164, 61%, 63%, 0.401),
+    lightblue,
+    rgba(255, 0, 0, 0.356)
+  ); */
   width: 100vw;
 }
 
@@ -75,6 +75,21 @@ body {
   margin-right: 15px;
 }
 
+/* Content Styles */
+/* #content {
+  align-items: center;
+  padding: 20px;
+  color: rgb(4, 2, 2);
+  background-color: white;
+
+  border-radius: 30px;
+}
+/* Movie List Styles */
+
+/* Movie List Styles */
+
+/* Style for the container holding the movie cards */
+/* CSS for the content area */
 #content {
   display: flex;
   flex-wrap: wrap;
@@ -108,6 +123,20 @@ body {
   text-align: center;
   color: aliceblue;
 }
+#movie {
+  height: 800px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#movie .poster {
+  max-width: 300px;
+  height: auto;
+  float: left;
+  margin-right: 20px;
+  color: #fff;
+}
 
 /* CSS for the favorite and remove buttons */
 button {
@@ -132,3 +161,13 @@ button:hover {
 button.active {
   background-color: #28a745;
 }
+
+/* Optional: CSS for the search input */
+/* #searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 16px;
+} */

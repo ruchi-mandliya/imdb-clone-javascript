@@ -20,8 +20,14 @@ function showHomePage() {
           <p>${movie.Title}</p>
           
         `;
+          div.onclick = () => openDetails(movie.imdbID);
 
           contentDiv.appendChild(div);
+
+          //     <div class="add-movie-to-list"  id="${movie.id}" onclick="addMovie(${movie.id})">
+          //     <i class="fas fa-plus"></i>
+          // </div>
+
           const favoriteBtn = createFavoriteButton(movie.imdbID);
           div.appendChild(favoriteBtn);
         });
@@ -64,8 +70,11 @@ function searchMovies() {
           <p>${movie.Title}</p>
           
         `;
+          div.onclick = () => openDetails(movie.imdbID);
 
           contentDiv.appendChild(div);
+          const favoriteBtn = createFavoriteButton(movie.imdbID);
+          div.appendChild(favoriteBtn);
         });
       } else {
         contentDiv.innerHTML = `<p>No movies found for "${query}".</p>`;
@@ -77,6 +86,64 @@ function searchMovies() {
       contentDiv.innerHTML = `<p>An error occurred while searching for movies.</p>`;
     });
 }
+function showFavorites() {
+  const contentDiv = document.getElementById("content");
+  contentDiv.innerHTML = "";
+
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if (favorites.length > 0) {
+    result.innerHTML = "<h2>My favorite Movies</h2>";
+
+    favorites.forEach((movie) => {
+      const div = document.createElement("div");
+      div.className = "movie";
+      div.innerHTML = `
+      <img src="${movie.Poster}">
+      <p>${movie.Title}</p>
+      
+    `;
+      contentDiv.appendChild(div);
+
+      const removeBtn = createRemoveButton(movie.imdbID);
+      div.appendChild(removeBtn);
+      contentDiv.appendChild(div);
+    });
+  } else {
+    contentDiv.innerHTML = "<h2>No favorite movies found.</h2>";
+  }
+}
+
+// Create a `favoriteBtn` element.
+// const favoriteBtn = document.createElement("button");
+
+// // Set the `innerText` property of the `favoriteBtn` element to "Add to Favorites".
+// favoriteBtn.innerText = "Add to Favorites";
+
+// // Append the `favoriteBtn` element to the `li` element.
+// li.appendChild(favoriteBtn);
+
+// // Check if the movie is already in the favorites list.
+// const favorites = JSON.parse(localStorage.getItem("favorites"));
+// const isFavorited = favorites.some((movie) => movie.imdbID === movie.imdbID);
+
+// // If the movie is already in the favorites list, set the `favoriteBtn` element's `classlist` property to `active` and disable the button.
+// if (isFavorited) {
+//   favoriteBtn.classList.add("active");
+//   favoriteBtn.innerText = "favourited";
+//   favoriteBtn.disabled = true;
+// }
+
+// // Add an event listener to the `favoriteBtn` element. When the button is clicked, the `favorites` object is checked to see if the movie is already in the favorites list. If the movie is not in the favorites list, it is added to the list.
+// favoriteBtn.addEventListener("click", () => {
+//   if (!isFavorited) {
+//     favorites.push(movie);
+//     localStorage.setItem("favorites", JSON.stringify(favorites));
+//   }
+//   return li;
+// });
+
+// Return the `li` element.
 
 function createFavoriteButton(imdbID) {
   // Create a new `button` element.
@@ -127,34 +194,6 @@ function createFavoriteButton(imdbID) {
   });
   return btn;
 }
-
-function showFavorites() {
-  const contentDiv = document.getElementById("content");
-  contentDiv.innerHTML = "";
-
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-  if (favorites.length > 0) {
-    result.innerHTML = "<h2>My favorite Movies</h2>";
-
-    favorites.forEach((movie) => {
-      const div = document.createElement("div");
-      div.className = "movie";
-      div.innerHTML = `
-      <img src="${movie.Poster}">
-      <p>${movie.Title}</p>
-      
-    `;
-      contentDiv.appendChild(div);
-
-      const removeBtn = createRemoveButton(movie.imdbID);
-      div.appendChild(removeBtn);
-      contentDiv.appendChild(div);
-    });
-  } else {
-    contentDiv.innerHTML = "<h2>No favorite movies found.</h2>";
-  }
-}
 function createRemoveButton(imdbID) {
   const button = document.createElement("button");
   button.innerText = "Remove from Favorites";
@@ -177,4 +216,28 @@ function createRemoveButton(imdbID) {
   return button;
 }
 
+function openDetails(id) {
+  window.location.href = `details.html?id=${id}`;
+}
+
+// const id = new URLSearchParams(window.location.search).get("id");
+
+// fetch(`https://www.omdbapi.com/?i=${id}&apikey=${API_KEY}`)
+//   .then((response) => response.json())
+//   .then((movie) => {
+//     document.getElementById("movie").innerHTML = `
+//       <img src="${movie.Poster}" class="poster">
+
+//       <div>
+//         <h2>${movie.Title} (${movie.Year})</h2>
+
+//         <p>${movie.Rated} | ${movie.Runtime}</p>
+
+//         <p>${movie.Plot}</p>
+
+//         <p>Director: ${movie.Director}</p>
+//         <p>Stars: ${movie.Actors}</p>
+//       </div>
+//     `;
+//   });
 showHomePage();
